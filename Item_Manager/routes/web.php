@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\itemcontroller;
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = Item::all();
+    return view('itemmanage')->with('items',$data);
 });
+
+Route::post('/saveItem',[itemcontroller::class,'saveitem']);
+Route::get('/delete/{id}',[itemcontroller::class,'delete']);
+Route::get('/update/{id}',[itemcontroller::class,'update']);
+Route::post('/updateitem/{id}',[itemcontroller::class,'updateitem']);
